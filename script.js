@@ -2,18 +2,22 @@ const randomEasy = () => {
     return Math.floor(Math.random() * (99) + 0)
 }
 /**
- * a function that given two array counts how many distinct itmes the elements appear in the second
+ * a function that given two array counts how many distinct itmes the elements appear in the second, then copies them in the third
  * @param {object} firstArray -  array with elements to confront
  * @param {object} secondArray - array to be confronted
+ * @param {object} thirdArray - copied array
  * @returns the number of times the first' elements appear in the second  
  */
-const check = (firstArray, secondArray) => {
+const check = (firstArray, secondArray, thirdArray) => {
     let counter = 0;
+
     for (let i = 0; i < firstArray.length; i++) {
         if (secondArray.includes(firstArray[i])) {
+            thirdArray[counter] = firstArray[i]
             const elem = secondArray.indexOf(firstArray[i]);
             secondArray.splice(elem, 1)
             counter++
+
         }
 
     }
@@ -40,9 +44,10 @@ let countdown;
 
 formElm.addEventListener("submit", function (event) {
     event.preventDefault();
+    let copiedArr = []
     userArray = [document.getElementById("first").value, document.getElementById("second").value, document.getElementById("third").value, document.getElementById("fourth").value, document.getElementById("fifth").value];
-    const correct = check(userArray.map(Number), randomArray);
-    document.getElementById("correct").innerHTML = `${correct}`
+    const correct = check(userArray.map(Number), randomArray, copiedArr);
+    document.getElementById("correct").innerHTML = `${correct} numeri! (${copiedArr})`
     document.getElementById("response").classList.remove("d-none")
     clearInterval(countdown)
 
