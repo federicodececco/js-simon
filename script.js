@@ -43,6 +43,7 @@ formElm.addEventListener("submit", function (event) {
     userArray = [document.getElementById("first").value, document.getElementById("second").value, document.getElementById("third").value, document.getElementById("fourth").value, document.getElementById("fifth").value];
     const correct = check(userArray.map(Number), randomArray);
     document.getElementById("correct").innerHTML = `${correct}`
+    document.getElementById("response").classList.remove("d-none")
 
 
 })
@@ -54,6 +55,14 @@ send.addEventListener("click", function () {
     document.getElementById("displaySection").classList.add("d-none")
     document.getElementById("timerSection").classList.remove("d-none")
     document.getElementById("formSection").classList.remove("d-none")
-    setTimeout(() => alert("hai perso"), 10000)
+    let count = 30;
+    const countdown = setInterval(() => {
+        document.getElementById("seconds").innerHTML = count;
+
+        if (count === 0) {
+            clearInterval(countdown);
+            alert("tempo scaduto!")
+        } count--
+    }, 1000)
 
 })
